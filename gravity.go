@@ -5,7 +5,7 @@ import (
 	"engo.io/engo/common"
 )
 
-const gravitiyIncrement = 0.1
+const gravitiyIncrement = 2
 
 type gravityComponent struct {
 	basic    *ecs.BasicEntity

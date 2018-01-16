@@ -3,9 +3,8 @@ package main
 import (
 	"log"
 
-	"engo.io/engo"
-
 	"engo.io/ecs"
+	"engo.io/engo"
 	"engo.io/engo/common"
 )
 
@@ -30,7 +29,7 @@ func NewPlayer() *Player {
 		SpaceComponent: common.SpaceComponent{
 			Width:    sprite.Width() * 4,
 			Height:   sprite.Height() * 4,
-			Position: engo.Point{X: 0, Y: 0},
+			Position: engo.Point{X: 490, Y: 0},
 		},
 		RenderComponent: common.RenderComponent{
 			Drawable: sprite,
