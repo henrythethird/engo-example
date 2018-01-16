@@ -3,10 +3,12 @@ package main
 import (
 	"image/color"
 
-	"engo.io/engo"
-
 	"engo.io/ecs"
+	"engo.io/engo"
 	"engo.io/engo/common"
+
+	"github.com/henrythethird/game/components"
+	"github.com/henrythethird/game/systems"
 )
 
 // The Default scene
@@ -23,11 +25,11 @@ func (d *Default) Setup(world *ecs.World) {
 
 	common.SetBackground(color.White)
 
-	gravity := NewGravity()
+	gravity := systems.NewGravity()
 	render := &common.RenderSystem{}
-	walking := NewWalking()
+	walking := systems.NewWalking()
 
-	player := NewPlayer()
+	player := components.NewPlayer()
 
 	walking.Add(&player.BasicEntity, &player.VelocityComponent)
 	gravity.Add(&player.BasicEntity, &player.VelocityComponent, &player.SpaceComponent)

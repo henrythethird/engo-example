@@ -1,8 +1,9 @@
-package main
+package systems
 
 import (
 	"engo.io/ecs"
 	"engo.io/engo"
+	"github.com/henrythethird/game/components"
 )
 
 const walkingSpeed = 1
@@ -10,31 +11,31 @@ const jumpSpeed = 1
 
 type walkingEntity struct {
 	basic    *ecs.BasicEntity
-	velocity *VelocityComponent
+	velocity *components.VelocityComponent
 }
 
 // The Walking system
-type WalkingSystem struct {
+type Walking struct {
 	entities map[uint64]walkingEntity
 }
 
 // NewWalking instantiates a new walking system
-func NewWalking() *WalkingSystem {
-	return &WalkingSystem{make(map[uint64]walkingEntity)}
+func NewWalking() *Walking {
+	return &Walking{make(map[uint64]walkingEntity)}
 }
 
 // Add adds an entity to the system
-func (w *WalkingSystem) Add(basic *ecs.BasicEntity, velocity *VelocityComponent) {
+func (w *Walking) Add(basic *ecs.BasicEntity, velocity *components.VelocityComponent) {
 	w.entities[basic.ID()] = walkingEntity{basic, velocity}
 }
 
 // Remove removes an entity from the system
-func (w *WalkingSystem) Remove(basic ecs.BasicEntity) {
+func (w *Walking) Remove(basic ecs.BasicEntity) {
 	delete(w.entities, basic.ID())
 }
 
 // Update increments the system by a time step
-func (w *WalkingSystem) Update(dt float32) {
+func (w *Walking) Update(dt float32) {
 	left := engo.Input.Button("left").Down()
 	right := engo.Input.Button("right").Down()
 	jump := engo.Input.Button("jump").Down()
