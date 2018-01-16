@@ -10,28 +10,23 @@ const walkingSpeed = 1
 const jumpSpeed = 1
 
 type walkingEntity struct {
-	basic    *ecs.BasicEntity
-	velocity *components.VelocityComponent
+	*ecs.BasicEntity
+	*components.VelocityComponent
 }
 
 // The Walking system
 type Walking struct {
-	entities map[uint64]walkingEntity
+	*System
 }
 
 // NewWalking instantiates a new walking system
 func NewWalking() *Walking {
-	return &Walking{make(map[uint64]walkingEntity)}
+	return &Walking{NewSystem()}
 }
 
 // Add adds an entity to the system
 func (w *Walking) Add(basic *ecs.BasicEntity, velocity *components.VelocityComponent) {
-	w.entities[basic.ID()] = walkingEntity{basic, velocity}
-}
-
-// Remove removes an entity from the system
-func (w *Walking) Remove(basic ecs.BasicEntity) {
-	delete(w.entities, basic.ID())
+	w.AddEntity(walkingEntity{basic, velocity})
 }
 
 // Update increments the system by a time step
@@ -54,11 +49,12 @@ func (w *Walking) Update(dt float32) {
 		vertMult = -1
 	}
 
-	for _, entity := range w.entities {
-		entity.velocity.Velocity.X = horMult * walkingSpeed
+	for _, e := range w.entities {
+		entity := e.(walkingEntity)
+		entity.Velocity.X = horMult * walkingSpeed
 
 		if vertMult < 0 {
-			entity.velocity.Velocity.Y = vertMult * jumpSpeed
+			entity.Velocity.Y = vertMult * jumpSpeed
 		}
 	}
 }

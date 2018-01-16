@@ -28,16 +28,19 @@ func (d *Default) Setup(world *ecs.World) {
 	gravity := systems.NewGravity()
 	render := &common.RenderSystem{}
 	walking := systems.NewWalking()
+	network := systems.NewNetwork()
 
 	player := components.NewPlayer()
 
 	walking.Add(&player.BasicEntity, &player.VelocityComponent)
 	gravity.Add(&player.BasicEntity, &player.VelocityComponent, &player.SpaceComponent)
 	render.Add(&player.BasicEntity, &player.RenderComponent, &player.SpaceComponent)
+	network.Add(&player.BasicEntity, &player.VelocityComponent, &player.SpaceComponent)
 
 	world.AddSystem(render)
 	world.AddSystem(gravity)
 	world.AddSystem(walking)
+	world.AddSystem(network)
 }
 
 func (d *Default) setupKeys() {
