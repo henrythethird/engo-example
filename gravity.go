@@ -13,30 +13,30 @@ type gravityComponent struct {
 	space    *common.SpaceComponent
 }
 
-// The Gravity system simulates gravity
-type Gravity struct {
+// The GravitySystem simulates gravity
+type GravitySystem struct {
 	entities map[uint64]gravityComponent
 }
 
 // NewGravity instantiates a new gravity system
-func NewGravity() *Gravity {
-	return &Gravity{
+func NewGravity() *GravitySystem {
+	return &GravitySystem{
 		entities: make(map[uint64]gravityComponent),
 	}
 }
 
 // Add appends an entity to the gravity system
-func (g *Gravity) Add(basic *ecs.BasicEntity, velocity *VelocityComponent, space *common.SpaceComponent) {
+func (g *GravitySystem) Add(basic *ecs.BasicEntity, velocity *VelocityComponent, space *common.SpaceComponent) {
 	g.entities[basic.ID()] = gravityComponent{basic, velocity, space}
 }
 
 // Remove removes the entity from the system
-func (g *Gravity) Remove(basic ecs.BasicEntity) {
+func (g *GravitySystem) Remove(basic ecs.BasicEntity) {
 	delete(g.entities, basic.ID())
 }
 
 // Update simulates a time step
-func (g *Gravity) Update(dt float32) {
+func (g *GravitySystem) Update(dt float32) {
 	gravInc := dt * gravitiyIncrement
 
 	for _, entity := range g.entities {
