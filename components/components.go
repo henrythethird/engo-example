@@ -8,3 +8,8 @@ import (
 type VelocityComponent struct {
 	Velocity engo.Point
 }
+
+// GetVelocity returns the velocity
+func (v *VelocityComponent) GetVelocity() engo.Point {
+	return v.Velocity
+}

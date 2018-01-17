@@ -10,6 +10,7 @@ func main() {
 		Width:          1080,
 		Height:         720,
 		StandardInputs: true,
+		HeadlessMode:   true,
 	}
 
 	engo.Run(opts, &Default{})

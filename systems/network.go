@@ -26,7 +26,7 @@ func NewNetwork() *Network {
 }
 
 // Add adds an entity to the system
-func (n *Network) Add(basic *ecs.BasicEntity, velocity *components.VelocityComponent, space *common.SpaceComponent) {
+func (n *Network) Add(basic *ecs.BasicEntity, space *common.SpaceComponent, velocity *components.VelocityComponent) {
 	n.AddEntity(networkEntity{basic, velocity, space})
 }
 
@@ -36,5 +36,6 @@ func (n *Network) Update(dt float32) {
 		entity := e.(networkEntity)
 
 		fmt.Println(entity.Center())
+		fmt.Println(entity.Velocity)
 	}
 }

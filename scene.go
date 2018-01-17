@@ -35,7 +35,7 @@ func (d *Default) Setup(world *ecs.World) {
 	walking.Add(&player.BasicEntity, &player.VelocityComponent)
 	gravity.Add(&player.BasicEntity, &player.VelocityComponent, &player.SpaceComponent)
 	render.Add(&player.BasicEntity, &player.RenderComponent, &player.SpaceComponent)
-	network.Add(&player.BasicEntity, &player.VelocityComponent, &player.SpaceComponent)
+	network.Add(&player.BasicEntity, &player.SpaceComponent, &player.VelocityComponent)
 
 	world.AddSystem(render)
 	world.AddSystem(gravity)

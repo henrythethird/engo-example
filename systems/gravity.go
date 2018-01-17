@@ -38,7 +38,7 @@ func (g *Gravity) Update(dt float32) {
 		entity := e.(gravityComponent)
 
 		c := entity.Center()
-		c.Add(entity.Velocity)
+		c.Add(entity.GetVelocity())
 		entity.SetCenter(c)
 
 		entity.Velocity.Y += gravInc
